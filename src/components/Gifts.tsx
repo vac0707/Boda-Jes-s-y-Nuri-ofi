@@ -1,305 +1,150 @@
 import { useState } from "react";
-import { motion } from "motion/react";
-import { Gift, CreditCard, Clipboard, Check, Sparkles } from "lucide-react";
-import { useLanguage } from "../hooks/useLanguage";
+import { motion, AnimatePresence } from "motion/react";
+import { Check, Copy } from "lucide-react";
 
 export default function Gifts() {
-  const { t, lang } = useLanguage();
-  const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"banks" | "wallets">("banks");
+  const [copiedValue, setCopiedValue] = useState<string | null>(null);
 
-  const bcpAccount = "193-98654320-0-14";
-  const bcpCci = "002-19398654320014022";
-  const interbankAccount = "200-3124567892";
-  const interbankCci = "003-200312456789298";
-  const yapeNumber = "987 654 321";
-  const plinNumber = "955 123 456";
-
-  const copyToClipboard = async (text: string, type: string) => {
+  const copyToClipboard = async (text: string, label: string) => {
     try {
-      await navigator.clipboard.writeText(text.replace(/\s+/g, ""));
-      setCopiedAccount(type);
-      setTimeout(() => setCopiedAccount(null), 2500);
+      // Remove spaces for copying numbers cleanly
+      const cleanText = text.replace(/[^0-9]/g, "");
+      await navigator.clipboard.writeText(cleanText);
+      setCopiedValue(label);
+      setTimeout(() => setCopiedValue(null), 2000);
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error("Failed to copy: ", err);
     }
   };
 
+  const giftAccounts = [
+    {
+      owner: "MILAGROS QUISPE FLORES",
+      items: [
+        { label: "INTERBANK", value: "343 3339979967" },
+        { label: "CCI", value: "00334301333997996714" },
+        { label: "YAPE", value: "953918435" }
+      ]
+    },
+    {
+      owner: "CRISTHIAN CONDORI MARCAVILLACA",
+      items: [
+        { label: "BCP", value: "21502103522066" },
+        { label: "CCI", value: "00221510210352206629" },
+        { label: "YAPE", value: "915082664" }
+      ]
+    }
+  ];
+
   return (
-    <section id="regalos" className="relative py-32 px-4 sm:px-6 bg-[#faf9f6] overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
+    <section id="regalos" className="relative py-24 px-4 sm:px-6 bg-[#faf9f6]/30 overflow-hidden">
+      {/* Soft divider lines top/bottom */}
+      <div className="absolute top-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
-        {/* Header Block */}
-        <div className="text-center mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="flex flex-col items-center"
-          >
-            <Gift className="w-5 h-5 text-[#dfb559] mb-4 animate-bounce" />
-            <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              {t("gifts.tag")}
-            </span>
-            <h2 className="font-great-vibes text-5xl sm:text-6.5xl text-[#3a4b3d] mt-2 mb-2 select-none font-normal">
-              {t("gifts.title")}
-            </h2>
-            <div className="w-16 h-[1.5px] bg-[#dfb559]" />
-            <p className="text-[#666] text-sm font-serif italic mt-5 max-w-sm leading-relaxed">
-              {t("gifts.desc")}
-            </p>
-          </motion.div>
-        </div>
+      <div className="max-w-xl mx-auto relative z-10 flex flex-col items-center">
+        
+        {/* Title "Regalos" */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="text-center mb-6"
+        >
+          {/* Cursive Pinyon Script / Great Vibes title in soft sage green */}
+          <h2 className="font-great-vibes text-7xl sm:text-8.5xl text-[#849685] select-none leading-none mb-4 transform -rotate-1">
+            Regalos
+          </h2>
+        </motion.div>
 
-        {/* Gift Options Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
-          {/* Card 1: Envelope gift */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="bg-white border-2 border-[#dfb559]/30 rounded-xs p-8 sm:p-12 shadow-[0_15px_35px_rgba(0,0,0,0.04)] relative flex flex-col justify-between items-center text-center hover:border-[#dfb559] hover:shadow-[0_20px_45px_rgba(212,175,55,0.06)] transition-all duration-500"
-          >
-            {/* Fine border inside card */}
-            <div className="absolute inset-1.5 border border-[#dfb559]/10 pointer-events-none" />
+        {/* Message Intro */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.15 }}
+          className="text-center mb-8 px-2"
+        >
+          <p className="font-serif text-[17px] sm:text-xl text-[#4a5f4e] leading-relaxed mb-3">
+            ¡Si quieres hacernos un regalo,
+            <br className="sm:hidden" /> estaremos muy agradecidos!
+          </p>
+          <p className="font-serif text-[12.5px] sm:text-[14px] text-[#718c75]/85 leading-relaxed font-light italic max-w-sm mx-auto">
+            Recuerda que lo importante es que vengas con ilusión, alegría y ganas de pasarla bien
+          </p>
+        </motion.div>
 
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 bg-[#233025] rounded-full flex items-center justify-center mb-6 border border-[#dfb559]/30 shadow-md">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  className="w-7 h-7 text-[#dfb559]"
-                >
-                  <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2M22 6v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6M22 6l-10 7L2 6" />
-                </svg>
-              </div>
+        {/* Dynamic Clipboard Notify Popup */}
+        <AnimatePresence>
+          {copiedValue && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.95 }}
+              className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 bg-[#233025] text-[#dfb559] text-xs font-serif tracking-wider px-4 py-2.5 rounded-full shadow-xl border border-[#dfb559]/30 flex items-center gap-2"
+            >
+              <Check className="w-4 h-4 text-emerald-400" />
+              <span>Copiado: {copiedValue}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-              <h3 className="font-serif text-2xl text-[#3a4b3d] font-normal tracking-wide mb-1">
-                {t("gifts.envelope")}
-              </h3>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#c5a059] font-bold mb-6">
-                {t("gifts.envelope_sub")}
-              </span>
-              
-              <div className="w-12 h-[1px] bg-[#E5E1D8] mb-6" />
+        {/* The Two Detailed Gift Boxes */}
+        <div className="w-full space-y-6 px-2">
+          {giftAccounts.map((account, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-[440px] mx-auto border border-[#8A9A5B]/30 bg-white/40 p-6 sm:p-7 rounded-none text-center relative"
+            >
+              {/* Decorative Subtle Corner Accents */}
+              <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-[#8A9A5B]/40" />
+              <div className="absolute top-1 right-1 w-1.5 h-1.5 border-t border-r border-[#8A9A5B]/40" />
+              <div className="absolute bottom-1 left-1 w-1.5 h-1.5 border-b border-l border-[#8A9A5B]/40" />
+              <div className="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-[#8A9A5B]/40" />
 
-              <p className="text-[#555] text-xs sm:text-sm font-light leading-relaxed max-w-xs mt-2 text-justify sm:text-center">
-                {t("gifts.envelope_desc")}
-              </p>
-            </div>
+              {/* Owner Header Cover */}
+              <h4 className="font-serif text-[14px] sm:text-[15.5px] font-bold text-[#3a4b3d] tracking-wide mb-4">
+                {account.owner}
+              </h4>
 
-            <div className="flex items-center gap-2 text-[#8A9A5B] text-[10px] font-bold uppercase tracking-widest mt-8">
-              <Sparkles className="w-3.5 h-3.5 text-[#dfb559]" />
-              <span>{lang === "es" ? "Lluvia de Sobres" : "Envelopes of love"}</span>
-            </div>
-          </motion.div>
-
-          {/* Card 2: Bank Transfers & Wallets */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-            className="bg-white border-2 border-[#dfb559]/30 rounded-xs p-8 sm:p-12 shadow-[0_15px_35px_rgba(0,0,0,0.04)] relative flex flex-col justify-between hover:border-[#dfb559] hover:shadow-[0_20px_45px_rgba(212,175,55,0.06)] transition-all duration-500"
-          >
-            {/* Fine border inside card */}
-            <div className="absolute inset-1.5 border border-[#dfb559]/10 pointer-events-none" />
-
-            <div>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-[#233025] rounded-full flex items-center justify-center mb-6 border border-[#dfb559]/30 shadow-md">
-                  <CreditCard className="w-7 h-7 text-[#dfb559]" strokeWidth={1.25} />
-                </div>
-
-                <h3 className="font-serif text-2xl text-[#3a4b3d] font-normal tracking-wide mb-1">
-                  {t("gifts.bank")}
-                </h3>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#8A9A5B] font-bold mb-6">
-                  {t("gifts.bank_sub")}
-                </span>
-              </div>
-
-              {/* Premium Sub-selector Tabs */}
-              <div className="flex p-0.5 bg-[#FAF9F6] rounded-xs border border-[#dfb559]/25 shadow-inner mb-6 max-w-xs mx-auto">
-                <button
-                  onClick={() => setActiveTab("banks")}
-                  className={`flex-1 py-2 rounded-xs text-[9px] uppercase tracking-[0.16em] font-bold transition-all cursor-pointer ${
-                    activeTab === "banks"
-                      ? "bg-[#233025] text-white shadow-md"
-                      : "text-sage-700 hover:text-sage-950"
-                  }`}
-                >
-                  {lang === "es" ? "Cuentas" : "Accounts"}
-                </button>
-                <button
-                  onClick={() => setActiveTab("wallets")}
-                  className={`flex-1 py-2 rounded-xs text-[9px] uppercase tracking-[0.16em] font-bold transition-all cursor-pointer ${
-                    activeTab === "wallets"
-                      ? "bg-[#233025] text-white shadow-md"
-                      : "text-sage-700 hover:text-sage-950"
-                  }`}
-                >
-                  Yape / Plin
-                </button>
-              </div>
-
-              {/* List of banking accounts or wallets */}
-              {activeTab === "banks" ? (
-                <div className="w-full space-y-4 text-left relative z-10">
-                  {/* BCP Account */}
-                  <div className="border border-[#dfb559]/25 rounded-xs p-4 bg-[#faf9f6] hover:bg-[#FAF9F6] transition-colors">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                        {lang === "es" ? "Banco BCP Soles" : "BCP Bank (Soles)"}
-                      </span>
-                      <span className="text-[9px] text-[#8A9A5B] uppercase font-bold">Jesús M. Ramírez</span>
-                    </div>
-                    <div className="flex flex-col gap-1.5 text-xs">
-                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-1">
-                        <span className="font-light text-gray-500">{lang === "es" ? "Nº Cuenta:" : "Account No:"}</span>
-                        <button
-                          onClick={() => copyToClipboard(bcpAccount, "bcpAcct")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[11px] cursor-pointer"
-                        >
-                          {bcpAccount}
-                          {copiedAccount === "bcpAcct" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-light text-gray-500">Nº CCI:</span>
-                        <button
-                          onClick={() => copyToClipboard(bcpCci, "bcpCci")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[10px] cursor-pointer"
-                        >
-                          {bcpCci}
-                          {copiedAccount === "bcpCci" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Interbank Account */}
-                  <div className="border border-[#dfb559]/25 rounded-xs p-4 bg-[#faf9f6]/95 hover:bg-[#FAF9F6] transition-colors">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                        {lang === "es" ? "Interbank Soles" : "Interbank (Soles)"}
-                      </span>
-                      <span className="text-[9px] text-[#8A9A5B] uppercase font-bold">Nuri A. Cuevas</span>
-                    </div>
-                    <div className="flex flex-col gap-1.5 text-xs">
-                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-1">
-                        <span className="font-light text-gray-500">{lang === "es" ? "Nº Cuenta:" : "Account No:"}</span>
-                        <button
-                          onClick={() => copyToClipboard(interbankAccount, "intAcct")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[11px] cursor-pointer"
-                        >
-                          {interbankAccount}
-                          {copiedAccount === "intAcct" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-light text-gray-500">Nº CCI:</span>
-                        <button
-                          onClick={() => copyToClipboard(interbankCci, "intCci")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[10px] cursor-pointer"
-                        >
-                          {interbankCci}
-                          {copiedAccount === "intCci" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full space-y-4 text-left relative z-10">
-                  {/* Yape Account */}
-                  <div className="border border-[#dfb559]/25 rounded-xs p-4 bg-[#faf9f6]/95 hover:bg-[#FAF9F6] transition-colors">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#800080]" />
-                        <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                          Yape
+              {/* Bank Details Rows */}
+              <div className="space-y-2.5 font-serif text-[12.5px] sm:text-[13.5px] text-[#4a5f4e]">
+                {account.items.map((item, itemIdx) => {
+                  const uniqueLabel = `${account.owner}-${item.label}-${itemIdx}`;
+                  return (
+                    <div
+                      key={itemIdx}
+                      onClick={() => copyToClipboard(item.value, `${item.label} (${item.value})`)}
+                      className="group cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 hover:bg-[#8A9A5B]/10 py-1 px-2 rounded-sm transition-all text-center"
+                      title="Haz clic para copiar"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-bold text-[#3a4b3d] tracking-normal">
+                          {item.label}:
+                        </span>
+                        <span className="font-medium text-[#556b57] tracking-wider select-all">
+                          {item.value}
                         </span>
                       </div>
-                      <span className="text-[9px] text-[#8a9a5b] uppercase font-bold">Jesús M. Ramírez</span>
+                      
+                      {/* Interactive Copy Assistant Indicator */}
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] text-[#c5a059] flex items-center gap-1 sm:ml-1">
+                        <Copy className="w-3 h-3" />
+                        <span>Copiar</span>
+                      </span>
                     </div>
-                    <div className="flex flex-col gap-1.5 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="font-light text-gray-400">{lang === "es" ? "Nº Celular:" : "Phone No:"}</span>
-                        <button
-                          onClick={() => copyToClipboard(yapeNumber, "yapeAcct")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[12px] cursor-pointer"
-                        >
-                          {yapeNumber}
-                          {copiedAccount === "yapeAcct" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Plin Account */}
-                  <div className="border border-[#dfb559]/25 rounded-xs p-4 bg-[#faf9f6]/95 hover:bg-[#FAF9F6] transition-colors">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#00b0ff]" />
-                        <span className="text-[10px] font-bold uppercase text-[#333] tracking-widest">
-                          Plin
-                        </span>
-                      </div>
-                      <span className="text-[9px] text-[#8a9a5b] uppercase font-bold">Nuri A. Cuevas</span>
-                    </div>
-                    <div className="flex flex-col gap-1.5 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="font-light text-gray-400">{lang === "es" ? "Nº Celular:" : "Phone No:"}</span>
-                        <button
-                          onClick={() => copyToClipboard(plinNumber, "plinAcct")}
-                          className="flex items-center gap-1.5 font-mono text-[#333] hover:text-[#c5a059] font-bold transition-all text-[12px] cursor-pointer"
-                        >
-                          {plinNumber}
-                          {copiedAccount === "plinAcct" ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
-                          ) : (
-                            <Clipboard className="w-3.5 h-3.5 text-[#dfb559]" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2 text-[#c5a059] text-[10px] font-bold uppercase tracking-widest mt-8 justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-[#dfb559]" />
-              <span>{lang === "es" ? "Transferencia Digital" : "Digital Transfer"}</span>
-            </div>
-          </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          ))}
         </div>
+
       </div>
     </section>
   );

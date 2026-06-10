@@ -49,47 +49,48 @@ export default function DressCode() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full bg-[#faf9f6] text-[#333] border-2 border-[#dfb559] rounded-xs p-8 sm:p-10 shadow-2xl relative flex flex-col justify-between group overflow-hidden"
+            className="w-full bg-[#faf9f6]/95 text-[#333] border-2 border-[#dfb559]/70 rounded-xl p-8 sm:p-10 shadow-2xl relative flex flex-col justify-between group overflow-hidden"
           >
             {/* Fine border inside card */}
-            <div className="absolute inset-1.5 border border-[#dfb559]/20 pointer-events-none" />
+            <div className="absolute inset-2 border border-[#dfb559]/20 rounded-lg pointer-events-none" />
 
             <div>
-              <div className="flex items-center justify-between mb-6 border-b border-[#E5E1D8] pb-4">
-                <span className="font-serif text-2xl font-light tracking-wide text-[#3a4b3d]">
+              <div className="flex items-center justify-between mb-8 border-b border-[#E5E1D8] pb-4">
+                <span className="font-serif text-3xl font-normal tracking-wide text-[#3a4b3d]">
                   {lang === "es" ? "Damas" : "Ladies"}
                 </span>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-[#d49c30] font-bold">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#d49c30] font-bold bg-[#faf9f6] px-2.5 py-1 rounded border border-[#dfb559]/30">
                   {lang === "es" ? "Vestido Largo" : "Formal Long Dress"}
                 </span>
               </div>
 
-              <div className="space-y-4 text-xs font-light text-[#555] leading-relaxed mb-8">
-                <p>
-                  {lang === "es"
-                    ? "Para este gran día, invitamos a nuestras distinguidas damas a lucir un "
-                    : "For this special day, we invite our ladies to wear a beautiful "}
-                  <strong className="text-[#3a4b3d] font-semibold">{lang === "es" ? "vestido largo de gala" : "formal long dress"}</strong>.
-                </p>
-                <p>
-                  {lang === "es"
-                    ? "Siéntete libre de elegir colores festivos que resalten tu elegancia y alegría."
-                    : "Feel free to choose festive colors that reflect your elegance and joy."}
-                </p>
+              <div className="space-y-4 text-[13px] font-sans text-[#444] leading-relaxed mb-6">
+                <div className="flex items-start gap-3">
+                  <span className="text-[#dfb559] text-base mt-0.5">•</span>
+                  <p>
+                    <strong className="text-[#3a4b3d] font-semibold">{lang === "es" ? "Estilo:" : "Style:"}</strong>{" "}
+                    {lang === "es" ? "Obligatorio vestido largo de gala." : "Formal long gown is required."}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#dfb559] text-base mt-0.5">•</span>
+                  <p>
+                    <strong className="text-[#3a4b3d] font-semibold">{lang === "es" ? "Paleta:" : "Palette:"}</strong>{" "}
+                    {lang === "es" ? "Colores festivos y alegres de su preferencia." : "Festive and joyful colors of your choosing."}
+                  </p>
+                </div>
 
                 {/* Important Color Note */}
-                <div className="border border-red-200/50 bg-[#fff5f5] rounded-sm p-4 mt-4 flex items-start gap-3">
-                  <div className="p-1.5 bg-red-100 rounded-full text-red-600 mt-0.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-red-600"></div>
-                  </div>
+                <div className="border border-red-200/40 bg-red-50/50 rounded-lg p-4 mt-6 flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-red-600 mt-1.5 flex-shrink-0 animate-ping" />
                   <div>
-                    <span className="text-[10px] font-bold text-red-700 uppercase tracking-wider block mb-0.5">
-                      {lang === "es" ? "Nota de Protocolo" : "Protocol Note"}
+                    <span className="text-[9px] font-bold text-red-700 uppercase tracking-widest block mb-0.5">
+                      {lang === "es" ? "Importante" : "Important"}
                     </span>
-                    <p className="text-[11px] text-red-600/95 leading-normal">
+                    <p className="text-[11px] text-red-700/95 leading-normal font-medium">
                       {lang === "es"
-                        ? "Por favor, evitar vestimentas de color blanco, marfil o crema para respetar el atuendo de la novia."
-                        : "Please avoid wearing white, ivory, or cream color dress to respect the bride's attire."}
+                        ? "Evitar vestimentas de color blanco, marfil o crema."
+                        : "Strictly avoid white, ivory, or cream color dress."}
                     </p>
                   </div>
                 </div>
@@ -108,49 +109,42 @@ export default function DressCode() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full bg-[#1b251e] text-white border-2 border-[#dfb559]/40 rounded-xs p-8 sm:p-10 shadow-2xl relative flex flex-col justify-between group overflow-hidden"
+            className="w-full bg-[#1b251e] text-white border-2 border-[#dfb559] rounded-xl p-8 sm:p-10 shadow-2xl relative flex flex-col justify-between group overflow-hidden"
           >
             {/* Fine border inside card */}
-            <div className="absolute inset-1.5 border border-[#dfb559]/10 pointer-events-none" />
+            <div className="absolute inset-2 border border-[#dfb559]/20 rounded-lg pointer-events-none" />
 
             <div>
-              <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-                <span className="font-serif text-2xl font-light tracking-wide text-[#dfb559]">
+              <div className="flex items-center justify-between mb-8 border-b border-white/15 pb-4">
+                <span className="font-serif text-3xl font-normal tracking-wide text-[#dfb559]">
                   {lang === "es" ? "Caballeros" : "Gentlemen"}
                 </span>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-[#dfb559] font-bold">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#dfb559] font-bold bg-[#233025] px-2.5 py-1 rounded border border-[#dfb559]/30">
                   {lang === "es" ? "Traje Oscuro" : "Dark Tie / Suit"}
                 </span>
               </div>
 
-              <div className="space-y-4 text-xs font-light text-gray-300 leading-relaxed mb-8">
-                <p>
-                  {lang === "es"
-                    ? "Para coordinar de manera exquisita, solicitamos a los caballeros asistir de "
-                    : "To coordinate exquisitely, we request our gentlemen to wear a "}
-                  <strong className="text-white font-semibold">{lang === "es" ? "traje formal oscuro o terna" : "dark formal suit or tuxedo"}</strong>.
-                </p>
-                <p>
-                  {lang === "es"
-                    ? "El uso de corbata o corbatín es obligatorio para mantener la sofisticación de la ceremonia."
-                    : "The use of a necktie or bowtie is required to maintain the sophistication of the ceremony."}
-                </p>
-                
-                {/* Style tip container */}
-                <div className="border border-white/5 bg-white/5 rounded-sm p-4 mt-4 flex items-start gap-3">
-                  <div className="p-1.5 bg-[#dfb559]/10 rounded-full text-[#dfb559] mt-0.5">
-                    <PartyPopper className="w-3 h-3 text-[#dfb559]" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold text-[#dfb559] uppercase tracking-wider block mb-0.5">
-                      {lang === "es" ? "Consejo de Estilo" : "Style Tip"}
-                    </span>
-                    <p className="text-[11px] text-gray-350 leading-normal">
-                      {lang === "es"
-                        ? "Un calzado negro pulido y accesorios clásicos complementarán tu terna a la perfección."
-                        : "Black polished dress shoes and classic silver accessories will round up your attire perfectly."}
-                    </p>
-                  </div>
+              <div className="space-y-4 text-[13px] font-sans text-gray-200 leading-relaxed mb-6">
+                <div className="flex items-start gap-3">
+                  <span className="text-[#dfb559] text-base mt-0.5">•</span>
+                  <p>
+                    <strong className="text-[#dfb559] font-semibold">{lang === "es" ? "Estilo:" : "Style:"}</strong>{" "}
+                    {lang === "es" ? "Traje formal oscuro, terna o esmoquin." : "Dark formal suit, tuxedo or suit."}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#dfb559] text-base mt-0.5">•</span>
+                  <p>
+                    <strong className="text-[#dfb559] font-semibold">{lang === "es" ? "Accesorios:" : "Accessories:"}</strong>{" "}
+                    {lang === "es" ? "El uso de corbata o corbatín es obligatorio." : "The use of a necktie or bowtie is required."}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#dfb559] text-base mt-0.5">•</span>
+                  <p>
+                    <strong className="text-[#dfb559] font-semibold">{lang === "es" ? "Calzado:" : "Footwear:"}</strong>{" "}
+                    {lang === "es" ? "Zapatos de vestir formales bien lustrados." : "Polished, elegant formal dress shoes."}
+                  </p>
                 </div>
               </div>
             </div>

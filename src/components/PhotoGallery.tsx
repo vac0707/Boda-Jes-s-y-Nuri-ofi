@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { GalleryImage } from "../types";
-import { Maximize2, X, ChevronLeft, ChevronRight, Sparkles, Grid, SlidersHorizontal } from "lucide-react";
+import { Maximize2, X, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function PhotoGallery() {
@@ -19,8 +19,8 @@ export default function PhotoGallery() {
   ];
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [layoutMode, setLayoutMode] = useState<"grid" | "carousel">("grid");
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -44,23 +44,43 @@ export default function PhotoGallery() {
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -360, behavior: "smooth" });
+      const el = carouselRef.current;
+      if (el.scrollLeft <= 15) {
+        el.scrollTo({ left: el.scrollWidth - el.clientWidth, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: -340, behavior: "smooth" });
+      }
     }
   };
 
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 360, behavior: "smooth" });
+      const el = carouselRef.current;
+      const maxScrollLeft = el.scrollWidth - el.clientWidth;
+      if (el.scrollLeft >= maxScrollLeft - 25) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: 340, behavior: "smooth" });
+      }
     }
   };
 
+  // Automatic smooth scroll interval
+  useEffect(() => {
+    if (isHovered || lightboxIndex !== null) return;
+    const interval = setInterval(() => {
+      scrollRight();
+    }, 3800);
+    return () => clearInterval(interval);
+  }, [isHovered, lightboxIndex]);
+
   return (
-    <section id="galeria" className="relative py-32 px-4 sm:px-6 bg-[#faf9f6] overflow-hidden">
+    <section id="galeria" className="relative py-28 px-4 sm:px-6 bg-[#faf9f6]/40 overflow-hidden">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Title Box */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +88,7 @@ export default function PhotoGallery() {
             transition={{ duration: 1 }}
             className="flex flex-col items-center"
           >
-            <Sparkles className="w-5 h-5 text-[#dfb559] mb-4 animate-spin" style={{ animationDuration: "12s" }} />
+            <Sparkles className="w-5 h-5 text-[#dfb559] mb-4 animate-[pulse_2s_infinite]" />
             <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
               {lang === "es" ? "Nuestros Recuerdos" : "Our Memories"}
             </span>
@@ -78,140 +98,68 @@ export default function PhotoGallery() {
             <div className="w-16 h-[1.5px] bg-[#dfb559]" />
             <p className="text-[#666] text-sm font-serif italic mt-5 max-w-sm leading-relaxed">
               {lang === "es"
-                ? "Un recorrido independiente por instantes y sonrisas de complicidad eterna."
-                : "A separate journey highlighting beautiful moments of static timeless romance."}
+                ? "Un hermoso recorrido por instantes y sonrisas que reafirman nuestro amor."
+                : "A beautiful photographic journey highlighting sweet moments together."}
             </p>
           </motion.div>
-
-          {/* Layout Mode Control */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <span className="text-[10px] uppercase tracking-[0.15em] text-[#8A9A5B] font-bold">
-              {lang === "es" ? "Estilo:" : "Layout:"}
-            </span>
-            <div className="p-1 bg-[#F1EFE9] border border-[#dfb559]/25 rounded-sm flex shadow-inner">
-              <button
-                onClick={() => setLayoutMode("grid")}
-                className={`p-2 rounded-sm transition-all cursor-pointer ${
-                  layoutMode === "grid"
-                    ? "bg-[#c5a059] text-white shadow-md"
-                    : "text-sage-600 hover:text-sage-950"
-                }`}
-                title={lang === "es" ? "Mosaico Editorial" : "Editorial Masonry"}
-              >
-                <Grid className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setLayoutMode("carousel")}
-                className={`p-2 rounded-sm transition-all cursor-pointer ${
-                  layoutMode === "carousel"
-                    ? "bg-[#c5a059] text-white shadow-md"
-                    : "text-sage-600 hover:text-[#333]"
-                }`}
-                title={lang === "es" ? "Carrusel Deslizable" : "Cinematic Slider"}
-              >
-                <SlidersHorizontal className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
         </div>
 
-        {/* Dynamic Display Render */}
-        <AnimatePresence mode="wait">
-          {layoutMode === "grid" ? (
-            <motion.div
-              key="grid-layout"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.6 }}
-              className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
-            >
-              {images.map((img, idx) => (
-                <motion.div
-                  key={img.id}
-                  onClick={() => openLightbox(idx)}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.8, delay: (idx % 3) * 0.08 }}
-                  className="break-inside-avoid relative overflow-hidden rounded-xs group border-2 border-[#dfb559]/20 hover:border-[#dfb559]/70 shadow-md cursor-pointer bg-cream-50"
-                >
-                  <img
-                    src={img.url}
-                    alt="Colección de amor Jesús y Nuri"
-                    loading="lazy"
-                    className="w-full object-cover select-none pointer-events-none transform transition-all duration-[1000ms] group-hover:scale-103 group-hover:brightness-95"
-                    referrerPolicy="no-referrer"
-                  />
-
-                  {/* Elegant Golden Frame Overlay on Hover */}
-                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
-                    <div className="absolute inset-3 border-2 border-[#dfb559]/60 rounded-xs transform scale-90 group-hover:scale-100 transition-transform duration-500" />
-                    <motion.div className="p-3 bg-[#faf9f6] rounded-xs text-[#333] shadow-2xl relative z-10 border border-[#dfb559]/30">
-                      <Maximize2 className="w-4 h-4 text-[#c5a059]" />
-                    </motion.div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="carousel-layout"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.6 }}
-              className="relative w-full"
-            >
-              {/* Carousel container with touch overflow scrolling */}
+        {/* Carousel Slider with Auto scroll support */}
+        <div
+          className="relative w-full"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onTouchStart={() => setIsHovered(true)}
+        >
+          {/* Carousel container with touch overflow scrolling */}
+          <div
+            ref={carouselRef}
+            className="flex gap-6 overflow-x-auto pb-8 scroll-smooth snap-x snap-mandatory scrollbar-none scrollbar-hide px-2 sm:px-4"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {images.map((img, idx) => (
               <div
-                ref={carouselRef}
-                className="flex gap-6 overflow-x-auto pb-8 scrollbar-none px-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                key={img.id}
+                onClick={() => openLightbox(idx)}
+                className="flex-none w-[270px] sm:w-[330px] aspect-[4/5] snap-center rounded-xl overflow-hidden bg-[#233025] border-2 border-[#dfb559]/20 hover:border-[#dfb559]/75 shadow-lg cursor-pointer group relative transition-all duration-300"
               >
-                {images.map((img, idx) => (
-                  <div
-                    key={img.id}
-                    onClick={() => openLightbox(idx)}
-                    className="flex-none w-[290px] sm:w-[350px] aspect-[4/5] snap-center rounded-xs overflow-hidden bg-white border-2 border-[#dfb559]/20 hover:border-[#dfb559]/75 shadow-lg cursor-pointer group relative"
-                  >
-                    <img
-                      src={img.url}
-                      alt="Colección de amor Jesús y Nuri"
-                      loading="lazy"
-                      className="w-full h-full object-cover select-none pointer-events-none transform transition-transform duration-[10000ms] group-hover:scale-104"
-                      referrerPolicy="no-referrer"
-                    />
+                <img
+                  src={img.url}
+                  alt="Colección de amor Jesús y Nuri"
+                  loading="lazy"
+                  className="w-full h-full object-cover select-none pointer-events-none transform transition-transform duration-[8000ms] group-hover:scale-104"
+                  referrerPolicy="no-referrer"
+                />
 
-                    {/* Dark gradient base on list cards */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-80 pointer-events-none" />
-                    
-                    {/* Maximize zoom floating button */}
-                    <div className="absolute bottom-4 right-4 p-3 rounded-full bg-[#faf9f6]/95 text-[#dfb559] border border-[#dfb559]/30 opacity-70 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                ))}
+                {/* Dark gradient base on list cards */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-80 pointer-events-none" />
+                
+                {/* Maximize zoom floating button */}
+                <div className="absolute bottom-4 right-4 p-3 rounded-full bg-[#faf9f6]/95 text-[#dfb559] border border-[#dfb559]/30 opacity-70 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105">
+                  <Maximize2 className="w-4 h-4" />
+                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Slider Arrow Controls */}
-              <div className="flex justify-center gap-4 mt-2">
-                <button
-                  onClick={scrollLeft}
-                  className="p-3 rounded-full border border-[#dfb559]/40 bg-[#faf9f6] text-sage-600 hover:text-white hover:bg-[#c5a059] shadow-md transition-all cursor-pointer"
-                >
-                  <ChevronLeft className="w-5 h-5 font-bold" />
-                </button>
-                <button
-                  onClick={scrollRight}
-                  className="p-3 rounded-full border border-[#dfb559]/40 bg-[#faf9f6] text-sage-600 hover:text-white hover:bg-[#c5a059] shadow-md transition-all cursor-pointer"
-                >
-                  <ChevronRight className="w-5 h-5 font-bold" />
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Slider Arrow Controls */}
+          <div className="flex justify-center gap-4 mt-2">
+            <button
+              onClick={scrollLeft}
+              className="p-3 rounded-full border border-[#dfb559]/30 bg-[#faf9f6]/95 text-[#3a4b3d] hover:text-white hover:bg-[#c5a059] shadow-md transition-all cursor-pointer hover:border-transparent active:scale-95"
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-5 h-5 font-bold" />
+            </button>
+            <button
+              onClick={scrollRight}
+              className="p-3 rounded-full border border-[#dfb559]/30 bg-[#faf9f6]/95 text-[#3a4b3d] hover:text-white hover:bg-[#c5a059] shadow-md transition-all cursor-pointer hover:border-transparent active:scale-95"
+              aria-label="Siguiente"
+            >
+              <ChevronRight className="w-5 h-5 font-bold" />
+            </button>
+          </div>
+        </div>
 
         {/* Global Lightbox Popup with Gold corner detailing & slide paths */}
         <AnimatePresence>
@@ -256,7 +204,7 @@ export default function PhotoGallery() {
                 <img
                   src={images[lightboxIndex].url}
                   alt="Expanded love memories"
-                  className="max-w-full max-h-[75vh] object-contain rounded-xs border-2 border-[#dfb559] shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
+                  className="max-w-full max-h-[75vh] object-contain rounded-lg border-2 border-[#dfb559]/80 shadow-[0_25px_60px_rgba(0,0,0,0.8)]"
                   referrerPolicy="no-referrer"
                 />
 

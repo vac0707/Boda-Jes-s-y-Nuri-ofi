@@ -4,7 +4,7 @@ import WelcomeScreen from "./components/WelcomeScreen";
 import AudioPlayer from "./components/AudioPlayer";
 import Hero from "./components/Hero";
 import FamilyTribute from "./components/FamilyTribute";
-import OurStory from "./components/OurStory";
+import PhotoDivider from "./components/PhotoDivider";
 import EventsAndMaps from "./components/EventsAndMaps";
 import Schedule from "./components/Schedule";
 import DressCode from "./components/DressCode";
@@ -13,7 +13,6 @@ import Gifts from "./components/Gifts";
 import Countdown from "./components/Countdown";
 import RSVPForm from "./components/RSVPForm";
 import RomanticQuote from "./components/RomanticQuote";
-import FloatingWhatsapp from "./components/FloatingWhatsapp";
 import FloatingLeaves from "./components/FloatingLeaves";
 import FooterRefined from "./components/FooterRefined";
 import { useLanguage } from "./hooks/useLanguage";
@@ -73,9 +72,6 @@ export default function App() {
           {/* Persistent Background Music Controller */}
           <AudioPlayer systemUnlocked={unlocked} />
 
-          {/* Persistent Floating Chat Widget */}
-          <FloatingWhatsapp systemUnlocked={unlocked} />
-
           {/* Fullscreen Parallax Header */}
           <Hero />
 
@@ -88,34 +84,41 @@ export default function App() {
             bgType="sage"
           />
 
+          {/* Elegant Wedding Portrait above families */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968212/22_wynwmc.jpg" alt="Jesús y Nuri - Elegancia" />
+
           {/* Parents & Godparents Family Presentation */}
           <FamilyTribute />
 
-          {/* Cinematic Love Journey Timeline */}
-          <OurStory />
-
-          {/* Separator Romantic Quote Panel 2 */}
-          <RomanticQuote
-            quote={lang === "es"
-              ? "El amor nos encontró, decidió quedarse, y nosotros decidimos caminar de la mano para siempre."
-              : "Love found us, decided to stay, and we decided to walk hand in hand forever."}
-            bgType="dark"
-          />
+          {/* Interleaved Image 1: Romantic Walk */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968214/04_jafhgb.jpg" alt="Jesús y Nuri juntos" />
 
           {/* Church and Banquet cards + Maps interactive Tab */}
           <EventsAndMaps />
 
+          {/* Interleaved Image 2: Sunset Portrait */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968214/05_nxuzj3.jpg" alt="Sesión de fotos al atardecer" />
+
           {/* Timeline Process of the Day */}
           <Schedule />
+
+          {/* Interleaved Image 3: Vintage Portrait */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968205/06_po8nhb.jpg" alt="Momentos del amor" />
 
           {/* Attire Etiquette specifications */}
           <DressCode />
 
+          {/* Interleaved Image 4: Garden Embrace */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968205/08_tritav.jpg" alt="Abrazo romántico" />
+
           {/* Non-overlapping visual grid / touch slider */}
           <PhotoGallery />
 
-          {/* Gift table / Cash Contributions options */}
+          {/* Gift table / Cash Contributions options (Without Envelope rain) */}
           <Gifts />
+
+          {/* Interleaved Image 5: Sunset Sparkle */}
+          <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968206/10_cuonxy.jpg" alt="La magia del amor" />
 
           {/* Countdown Clock & Monthly Calendar Reference */}
           <Countdown />

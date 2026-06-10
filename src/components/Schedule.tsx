@@ -1,73 +1,236 @@
 import { motion } from "motion/react";
-import { ScheduleEvent } from "../types";
-import { Church, GlassWater, Utensils, Award, Music4, Sparkles, Clock } from "lucide-react";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function Schedule() {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
 
-  const scheduleEvents: ScheduleEvent[] = [
+  // Schedule items precisely matching the user's reference image visual order & times starting from 12:00 PM
+  const scheduleItems = [
     {
       id: "1",
+      side: "right" as const,
       time: "12:00 PM",
-      title: t("schedule.event_1_title"),
-      description: t("schedule.event_1_desc"),
-      icon: "church",
+      titleEs: "CEREMONIA",
+      titleEn: "CEREMONY",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[48px] h-[48px] sm:w-[58px] sm:h-[58px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Ground line */}
+          <line x1="10" y1="90" x2="90" y2="90" strokeWidth="1" />
+          {/* Main church building facade */}
+          <path d="M35 90 V50 L50 30 L65 50 V90" />
+          <path d="M35 50 H65" strokeWidth="0.8" />
+          {/* Left annex */}
+          <path d="M15 90 V65 L35 50" />
+          {/* Right annex */}
+          <path d="M65 50 L85 65 V90" />
+          {/* Door */}
+          <path d="M44 90 V75 C44 70, 56 70, 56 75 V90" />
+          <line x1="50" y1="70" x2="50" y2="90" strokeWidth="0.8" />
+          {/* Steeple tower rising middle */}
+          <path d="M47 34 V15 H53 V34" />
+          <path d="M47 15 L50 5 L53 15" />
+          {/* Little windows for main block */}
+          <path d="M42 58 V66" strokeWidth="0.8" />
+          <path d="M58 58 V66" strokeWidth="0.8" />
+          {/* Cross */}
+          <line x1="50" y1="5" x2="50" y2="-5" strokeWidth="1.2" />
+          <line x1="46" y1="-1" x2="54" y2="-1" strokeWidth="1.2" />
+        </svg>
+      )
     },
     {
       id: "2",
-      time: "02:00 PM",
-      title: t("schedule.event_2_title"),
-      description: t("schedule.event_2_desc"),
-      icon: "reception",
+      side: "left" as const,
+      time: "01:30 PM",
+      titleEs: "FOTOS",
+      titleEn: "PHOTOS",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[42px] h-[42px] sm:w-[50px] sm:h-[50px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Camera body */}
+          <rect x="20" y="35" width="60" height="42" rx="4" />
+          {/* Top dial and flash bar */}
+          <path d="M35 35 V28 H45 V35" />
+          <circle cx="68" cy="27" r="4" />
+          {/* Decorative grip */}
+          <rect x="27" y="42" width="10" height="6" rx="1" />
+          {/* Lens Outer circle */}
+          <circle cx="50" cy="56" r="17" />
+          {/* Heart in the center */}
+          <path d="M50 62 L46.5 58.5 C41 53.5 39.5 50 42 47 C44 44.5 47.5 44.5 50 47.5 C52.5 44.5 56 44.5 58 47 C60.5 50 59 53.5 53.5 58.5 Z" fill="#58715c" opacity="0.1" />
+          <path d="M50 62 L46.5 58.5 C41 53.5 39.5 50 42 47 C44 44.5 47.5 44.5 50 47.5 C52.5 44.5 56 44.5 58 47 C60.5 50 59 53.5 53.5 58.5 Z" stroke="#58715c" strokeWidth="1.1" />
+        </svg>
+      )
     },
     {
       id: "3",
-      time: "03:00 PM",
-      title: t("schedule.event_3_title"),
-      description: t("schedule.event_3_desc"),
-      icon: "lunch",
+      side: "right" as const,
+      time: "02:00 PM",
+      titleEs: "RECEPCIÓN",
+      titleEn: "RECEPTION",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[46px] h-[46px] sm:w-[56px] sm:h-[56px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Ground line */}
+          <line x1="15" y1="90" x2="85" y2="90" strokeWidth="1" />
+          {/* Arch canopy frame */}
+          <path d="M28 90 V55 C28 35, 72 35, 72 55 V90" />
+          {/* Heart in middle arch */}
+          <path d="M50 35 L47.5 32.5 C43 28, 41 25, 43 22 C45 19, 48 19, 50 21.5 C52 19, 55 19, 57 22 C59 25, 57 28, 52.5 32.5 Z" stroke="#58715c" strokeWidth="1" />
+          {/* Dining table under arch */}
+          <path d="M34 72 H66" />
+          <path d="M38 72 V90" />
+          <path d="M62 72 V90" />
+          {/* Two little glasses on top */}
+          <path d="M46 63 H50 V72 H46 Z" />
+          <path d="M50 63 H54 V72 H50 Z" />
+        </svg>
+      )
     },
     {
       id: "4",
-      time: "05:00 PM",
-      title: t("schedule.event_4_title"),
-      description: t("schedule.event_4_desc"),
-      icon: "toast",
+      side: "left" as const,
+      time: "03:00 PM",
+      titleEs: "FELICITACIONES",
+      titleEn: "CONGRATULATIONS",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Round decorated table drape */}
+          <path d="M22 62 C22 62, 25 88, 50 88 C75 88, 78 62, 78 62" />
+          <path d="M16 62 H84 L78 88 H22 Z" fill="#58715c" opacity="0.08" />
+          {/* Table top ellipse */}
+          <ellipse cx="50" cy="62" rx="34" ry="5" />
+          {/* Table decorations: Candelabra and flower arrangements */}
+          <line x1="50" y1="62" x2="50" y2="44" strokeWidth="1.5" />
+          <path d="M44 48 C44 48, 44 53, 50 53 C56 53, 56 48, 56 48" />
+          <line x1="44" y1="48" x2="44" y2="43" />
+          <line x1="56" y1="48" x2="56" y2="43" />
+          {/* Candle flames */}
+          <circle cx="44" cy="40" r="1.2" fill="#58715c" />
+          <circle cx="50" cy="36" r="1.5" fill="#58715c" />
+          <circle cx="56" cy="40" r="1.2" fill="#58715c" />
+          {/* Plates */}
+          <ellipse cx="30" cy="62" rx="4" ry="1.2" />
+          <ellipse cx="70" cy="62" rx="4" ry="1.2" />
+        </svg>
+      )
     },
     {
       id: "5",
-      time: "08:00 PM",
-      title: t("schedule.event_5_title"),
-      description: t("schedule.event_5_desc"),
-      icon: "party",
+      side: "right" as const,
+      time: "04:30 PM",
+      titleEs: "FOTOS",
+      titleEn: "PHOTOS",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[42px] h-[42px] sm:w-[50px] sm:h-[50px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Camera body */}
+          <rect x="20" y="35" width="60" height="42" rx="4" />
+          {/* Top dial and flash bar */}
+          <path d="M35 35 V28 H45 V35" />
+          <circle cx="68" cy="27" r="4" />
+          {/* Decorative grip */}
+          <rect x="27" y="42" width="10" height="6" rx="1" />
+          {/* Lens Outer circle */}
+          <circle cx="50" cy="56" r="17" />
+          {/* Heart in the center */}
+          <path d="M50 62 L46.5 58.5 C41 53.5 39.5 50 42 47 C44 44.5 47.5 44.5 50 47.5 C52.5 44.5 56 44.5 58 47 C60.5 50 59 53.5 53.5 58.5 Z" fill="#58715c" opacity="0.1" />
+          <path d="M50 62 L46.5 58.5 C41 53.5 39.5 50 42 47 C44 44.5 47.5 44.5 50 47.5 C52.5 44.5 56 44.5 58 47 C60.5 50 59 53.5 53.5 58.5 Z" stroke="#58715c" strokeWidth="1.1" />
+        </svg>
+      )
     },
+    {
+      id: "6",
+      side: "left" as const,
+      time: "05:00 PM",
+      titleEs: "BRINDIS",
+      titleEn: "TOAST",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[46px] h-[46px] sm:w-[56px] sm:h-[56px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Left Glass tilted right */}
+          <g transform="translate(42, 54) rotate(18) translate(-42, -54)">
+            <path d="M30 35 L42 35 L44 55 C44 60, 36 60, 36 55 Z" fill="#58715c" opacity="0.08" />
+            <path d="M30 35 L42 35 L44 55 C44 60, 36 60, 36 55 Z" />
+            <line x1="40" y1="58" x2="40" y2="78" />
+            <ellipse cx="40" cy="78" rx="8" ry="1.5" />
+          </g>
+          {/* Right Glass tilted left */}
+          <g transform="translate(58, 54) rotate(-18) translate(-58, -54)">
+            <path d="M70 35 L58 35 L56 55 C56 60, 64 60, 64 55 Z" fill="#58715c" opacity="0.08" />
+            <path d="M70 35 L58 35 L56 55 C56 60, 64 60, 64 55 Z" />
+            <line x1="60" y1="58" x2="60" y2="78" />
+            <ellipse cx="60" cy="78" rx="8" ry="1.5" />
+          </g>
+          {/* Clink splash sparkles */}
+          <path d="M50 31 L50 24" />
+          <path d="M43 37 L38 33" />
+          <path d="M57 37 L62 33" />
+          {/* Tiny bubbles */}
+          <circle cx="49" cy="39" r="1" fill="#58715c" />
+          <circle cx="51" cy="44" r="0.8" fill="#58715c" />
+          <circle cx="46" cy="45" r="0.8" fill="#58715c" />
+        </svg>
+      )
+    },
+    {
+      id: "7",
+      side: "right" as const,
+      time: "06:00 PM",
+      titleEs: "BAILE VALS",
+      titleEn: "WALTZ DANCE",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Bride head & veil */}
+          <circle cx="43" cy="24" r="4.5" />
+          <path d="M39 23 C34 26, 32 35, 34 50 L38 48" />
+          {/* Groom head */}
+          <circle cx="55" cy="22" r="4.5" />
+          {/* Groom suit shoulder */}
+          <path d="M62 30 C58 29, 52 32, 49 35" />
+          <path d="M55 26.5 V48 L48 64" />
+          {/* Bride beautiful gown curves */}
+          <path d="M43 28.5 C38 32, 34 38, 32 46 C35 56, 31 70, 26 82 C34 86, 62 86, 74 80 C68 70, 56 46, 47 38" fill="#58715c" opacity="0.08" />
+          <path d="M43 28.5 C38 32, 34 38, 32 46 C35 56, 31 70, 26 82 C34 86, 62 86, 74 80 C68 70, 56 46, 47 38" />
+          <path d="M38 52 C42 60, 48 68, 56 75" strokeWidth="0.8" strokeDasharray="1.5 1.5" />
+          {/* Holding hands */}
+          <path d="M32 38 Q35 34, 38 38" />
+        </svg>
+      )
+    },
+    {
+      id: "8",
+      side: "left" as const,
+      time: "08:00 PM",
+      titleEs: "MÚSICA",
+      titleEn: "PARTY MUSIC",
+      icon: (
+        <svg viewBox="0 0 100 100" fill="none" stroke="#58715c" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-[42px] h-[42px] sm:w-[52px] sm:h-[52px] select-none pointer-events-none filter drop-shadow-[0_1px_2px_rgba(88,113,92,0.08)]">
+          {/* Music notes double */}
+          <path d="M30 65 V30 L65 22 V55" />
+          <path d="M30 40 L65 32" strokeWidth="1.2" />
+          <path d="M30 30 L65 22" strokeWidth="2" />
+          {/* Note heads */}
+          <g transform="rotate(-15, 30, 65)">
+            <ellipse cx="23" cy="65" rx="7" ry="4.5" fill="#58715c" />
+          </g>
+          <g transform="rotate(-15, 65, 55)">
+            <ellipse cx="58" cy="55" rx="7" ry="4.5" fill="#58715c" />
+          </g>
+          {/* Tiny single notes */}
+          <path d="M72 45 V25 Q78 28, 85 27" strokeWidth="0.8" />
+          <circle cx="72" cy="45" r="3" fill="#58715c" />
+        </svg>
+      )
+    }
   ];
 
-  const getIcon = (type: string) => {
-    switch (type) {
-      case "church":
-        return <Church className="w-5 h-5 text-[#dfb559]" />;
-      case "reception":
-        return <GlassWater className="w-5 h-5 text-[#dfb559]" />;
-      case "lunch":
-        return <Utensils className="w-5 h-5 text-[#dfb559]" />;
-      case "toast":
-        return <Award className="w-5 h-5 text-[#dfb559]" />;
-      case "party":
-        return <Music4 className="w-5 h-5 text-[#dfb559]" />;
-      default:
-        return <Sparkles className="w-5 h-5 text-[#dfb559]" />;
-    }
-  };
-
   return (
-    <section id="cronograma" className="relative py-32 px-4 sm:px-6 bg-[#faf9f6] overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
+    <section id="cronograma" className="relative py-28 px-4 sm:px-6 bg-[#faf9f6]/95 overflow-hidden">
+      {/* Soft gradient divider lines at boundaries */}
+      <div className="absolute top-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-[0.5px] bg-gradient-to-r from-transparent via-[#dfb559]/30 to-transparent" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
-        {/* Title Block */}
-        <div className="text-center mb-28">
+      <div className="max-w-2xl mx-auto relative z-10">
+        
+        {/* Title "Itinerario" in Calligraphy Script */}
+        <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -75,88 +238,126 @@ export default function Schedule() {
             transition={{ duration: 1 }}
             className="flex flex-col items-center"
           >
-            <Clock className="w-5 h-5 text-[#dfb559] mb-4 animate-pulse" />
-            <span className="font-sans text-xs tracking-[0.3em] text-[#8A9A5B] uppercase font-bold">
-              {t("schedule.label")}
-            </span>
-            <h2 className="font-great-vibes text-5xl sm:text-6.5xl text-[#3a4b3d] mt-2 mb-2 select-none font-normal">
-              {t("schedule.title")}
+            <h2 className="font-great-vibes text-7xl sm:text-8xl text-[#58715c]/90 select-none leading-none mb-2">
+              Itinerario
             </h2>
-            <div className="w-16 h-[1.5px] bg-[#dfb559]" />
-            <p className="text-[#666] text-sm font-serif italic mt-6 max-w-sm leading-relaxed">
-              {t("schedule.subtitle")}
-            </p>
+            {/* Center line small floral flourish */}
+            <div className="flex items-center gap-2 mt-1">
+              <div className="w-8 h-[0.5px] bg-[#58715c]/30" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="#58715c" strokeWidth="1" className="w-4 h-4 opacity-50">
+                <path d="M12 2 Q14 8, 20 12 Q14 16, 12 22 Q10 16, 4 12 Q10 8, 12 2 Z" />
+              </svg>
+              <div className="w-8 h-[0.5px] bg-[#58715c]/30" />
+            </div>
           </motion.div>
         </div>
 
-        {/* Vertical LUXURY Timeline structure */}
-        <div className="relative">
-          {/* Centered delicate gold vertical filament line */}
-          <div className="absolute left-6 sm:left-1/2 transform sm:-translate-x-1/2 top-4 bottom-4 w-[2px] bg-gradient-to-b from-[#dfb559]/20 via-[#c5a059] to-[#dfb559]/20 pointer-events-none" />
+        {/* Vertical Timeline container */}
+        <div className="relative pb-16">
+          {/* Centered Solid Vertical Timeline line in Brand Sage Green */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 top-4 bottom-4 w-[1.5px] bg-[#58715c]" />
 
-          {scheduleEvents.map((item, index) => {
-            const isEven = index % 2 === 0;
+          {/* Timeline Grid Rows */}
+          <div className="space-y-12 sm:space-y-16">
+            {scheduleItems.map((item, index) => {
+              const isLeft = item.side === "left";
 
-            return (
-              <div
-                key={item.id}
-                className={`relative flex flex-col sm:flex-row mb-16 last:mb-0 ${
-                  isEven ? "sm:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Visual Circle Milestone custom-crafted gold Badge */}
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.15 }}
-                  className="absolute left-6 sm:left-1/2 transform -translate-x-1/2 top-1 z-30 flex items-center justify-center w-11 h-11 rounded-full bg-[#233025] border-2 border-[#dfb559] shadow-xl"
-                >
-                  <div className="absolute inset-0.5 rounded-full border border-white/10" />
-                  {getIcon(item.icon)}
-                </motion.div>
+              return (
+                <div key={item.id} className="relative grid grid-cols-2 gap-x-8 sm:gap-x-12 items-center w-full min-h-[70px]">
+                  
+                  {/* Left Side Column */}
+                  <div className="w-full">
+                    {isLeft && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex items-center justify-end gap-3.5 sm:gap-5 text-right w-full relative"
+                      >
+                        {/* Information texts: Time & Title */}
+                        <div className="flex flex-col">
+                          <span className="font-serif text-[11px] sm:text-xs tracking-wider text-[#718c75] leading-none mb-1">
+                            {item.time}
+                          </span>
+                          <span className="font-serif font-bold text-[12.5px] sm:text-[14.5px] uppercase tracking-[0.16em] text-[#3a4b3d] leading-tight">
+                            {lang === "es" ? item.titleEs : item.titleEn}
+                          </span>
+                        </div>
 
-                {/* Sub-card box with custom margins */}
-                <div className="w-full sm:w-[44%] pl-16 sm:pl-0">
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -45 : 45 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-white border border-[#dfb559]/30 rounded-xs p-6 sm:p-8 shadow-[0_12px_24px_rgba(0,0,0,0.04)] relative overflow-hidden group hover:border-[#dfb559] hover:shadow-[0_18px_35px_rgba(212,175,55,0.08)] transition-all duration-500"
-                  >
-                    {/* Decorative interior fine frame */}
-                    <div className="absolute inset-1.5 border border-[#dfb559]/10 pointer-events-none" />
+                        {/* Hand Sketched Icon inside clean box */}
+                        <div className="w-[54px] h-[54px] sm:w-[65px] sm:h-[65px] rounded-none border border-[#58715c]/20 bg-white/40 flex items-center justify-center flex-shrink-0 relative">
+                          {item.icon}
+                        </div>
 
-                    {/* Time indicator styled as an luxury script detail */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <Clock className="w-3.5 h-3.5 text-[#dfb559]" />
-                      <span className="font-serif italic font-bold text-[#8A9A5B] text-sm tracking-wide leading-none">
-                        {item.time}
-                      </span>
-                      <div className="h-px bg-[#dfb559]/30 flex-grow" />
-                    </div>
+                        {/* Direct Horizontal connector line to the central line */}
+                        <div className="absolute right-[-16px] sm:right-[-24px] top-1/2 -translate-y-1/2 w-4 sm:w-6 h-[1px] bg-[#58715c]" />
+                      </motion.div>
+                    )}
+                  </div>
 
-                    <h4 className="font-serif text-xl text-[#3a4b3d] font-normal tracking-wide mb-3">
-                      {item.title}
-                    </h4>
+                  {/* Right Side Column */}
+                  <div className="w-full">
+                    {!isLeft && (
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex items-center justify-start gap-3.5 sm:gap-5 text-left w-full relative"
+                      >
+                        {/* Direct Horizontal connector line to the central line from left column */}
+                        <div className="absolute left-[-16px] sm:left-[-24px] top-1/2 -translate-y-1/2 w-4 sm:w-6 h-[1px] bg-[#58715c]" />
 
-                    <p className="text-[#555] text-xs font-light leading-relaxed text-justify">
-                      {item.description}
-                    </p>
+                        {/* Hand Sketched Icon inside clean box */}
+                        <div className="w-[54px] h-[54px] sm:w-[65px] sm:h-[65px] rounded-none border border-[#58715c]/20 bg-white/40 flex items-center justify-center flex-shrink-0 relative">
+                          {item.icon}
+                        </div>
 
-                    {/* Gold corner hover accent decoration */}
-                    <div className="absolute top-0 right-0 w-3 h-3 bg-[#dfb559] rounded-bl-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </motion.div>
+                        {/* Information texts: Time & Title */}
+                        <div className="flex flex-col">
+                          <span className="font-serif text-[11px] sm:text-xs tracking-wider text-[#718c75] leading-none mb-1">
+                            {item.time}
+                          </span>
+                          <span className="font-serif font-bold text-[12.5px] sm:text-[14.5px] uppercase tracking-[0.16em] text-[#3a4b3d] leading-tight">
+                            {lang === "es" ? item.titleEs : item.titleEn}
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
+
                 </div>
-
-                {/* Placeholders spaces for centering */}
-                <div className="hidden sm:block sm:w-[12%]" />
-                <div className="hidden sm:block sm:w-[44%]" />
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+
+        {/* Center alignment Bottom caption block precisely matching the reference: ¡CORTE DEL PASTEL Y MÁS! */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-center mt-6 flex flex-col items-center"
+        >
+          {/* Symmetrical line decorative flourish before final text */}
+          <div className="w-16 h-[0.7px] bg-[#58715c]/25 mb-5" />
+
+          <h3 className="font-serif text-[13.5px] sm:text-[16px] font-semibold text-[#3a4b3d] uppercase tracking-[0.2em] select-none">
+            {lang === "es" ? "¡CORTE DEL PASTEL Y MÁS!" : "¡CAKE CUTTING & MORE!"}
+          </h3>
+
+          <div className="flex gap-2.5 mt-4 select-none opacity-40">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#58715c" strokeWidth="1.2" className="w-3.5 h-3.5 animate-[spin_10s_linear_infinite]">
+              <path d="M12 2 C13 7, 18 11, 22 12 C18 13, 13 17, 12 22 C11 17, 6 13, 2 12 C6 11, 11 7, 12 2 Z" />
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#58715c" strokeWidth="1.2" className="w-3.5 h-3.5 animate-[spin_15s_linear_infinite]">
+              <path d="M12 2 C13 7, 18 11, 22 12 C18 13, 13 17, 12 22 C11 17, 6 13, 2 12 C6 11, 11 7, 12 2 Z" />
+            </svg>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
