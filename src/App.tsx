@@ -93,6 +93,9 @@ export default function App() {
           {/* Interleaved Image 1: Romantic Walk */}
           <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968214/04_jafhgb.jpg" alt="Jesús y Nuri juntos" />
 
+          {/* Countdown Clock & Monthly Calendar Reference */}
+          <Countdown />
+
           {/* Church and Banquet cards + Maps interactive Tab */}
           <EventsAndMaps />
 
@@ -119,9 +122,6 @@ export default function App() {
 
           {/* Interleaved Image 5: Sunset Sparkle */}
           <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968206/10_cuonxy.jpg" alt="La magia del amor" />
-
-          {/* Countdown Clock & Monthly Calendar Reference */}
-          <Countdown />
 
           {/* Interactive registration book connected to WhatsApp */}
           <RSVPForm />

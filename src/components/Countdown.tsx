@@ -147,13 +147,13 @@ export default function Countdown() {
             transition={{ duration: 1.2, delay: 0.1 }}
             className="w-full max-w-sm mx-auto bg-gradient-to-br from-white to-[#fbfbfa] rounded-2xl p-6 sm:p-8 shadow-[0_15px_45px_rgba(58,75,61,0.08)] border border-[#e5e7eb]/40 relative overflow-hidden text-[#3a4b3d]"
           >
-            {/* Top-Left Flower Corner Decoration (User Cloudinary Image) */}
-            <div className="absolute top-0 left-0 w-24 h-24 sm:w-28 sm:h-28 pointer-events-none select-none z-10">
+            {/* Top-Right Flower Corner Decoration (User Cloudinary Image) */}
+            <div className="absolute top-0 right-0 w-24 h-24 sm:w-28 sm:h-28 pointer-events-none select-none z-10 scale-x-[-1]">
               <img 
                 src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781019313/decoracion_ff5mrl.png" 
                 alt="Decoración superior" 
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-contain object-left-top"
+                className="w-full h-full object-contain object-right-top"
               />
             </div>
 
