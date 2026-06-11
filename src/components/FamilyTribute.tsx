@@ -57,24 +57,8 @@ export default function FamilyTribute() {
             </div>
           </div>
 
-          {/* Column 2: Godparents (Padrinos) with vertical borders */}
+          {/* Column 2: Parents of the Groom with vertical borders */}
           <div className="flex flex-col items-center px-6 md:pb-6 relative h-full md:border-x border-[#dfb559]/25">
-            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#8a9a5b] font-bold mb-4 block">
-              {t("family.godparents")}
-            </span>
-            <div className="w-8 h-[0.5px] bg-[#dfb559]/35 mb-6" />
-            <div className="space-y-4">
-              <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Carlos Alberto Nina Apaza
-              </p>
-              <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Yen y Virginia Velasquez Velasquez
-              </p>
-            </div>
-          </div>
-
-          {/* Column 3: Parents of the Groom */}
-          <div className="flex flex-col items-center px-6 md:pb-6 relative h-full">
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#8a9a5b] font-bold mb-4 block">
               {t("family.groom_parents")}
             </span>
@@ -85,6 +69,22 @@ export default function FamilyTribute() {
               </p>
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
                 Graciela Bravo Portal
+              </p>
+            </div>
+          </div>
+
+          {/* Column 3: Godparents (Padrinos) */}
+          <div className="flex flex-col items-center px-6 md:pb-6 relative h-full">
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-[#8a9a5b] font-bold mb-4 block">
+              {t("family.godparents")}
+            </span>
+            <div className="w-8 h-[0.5px] bg-[#dfb559]/35 mb-6" />
+            <div className="space-y-4">
+              <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
+                Carlos Alberto Nina Apaza
+              </p>
+              <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
+                Yen y Virginia Velasquez Velasquez
               </p>
             </div>
           </div>

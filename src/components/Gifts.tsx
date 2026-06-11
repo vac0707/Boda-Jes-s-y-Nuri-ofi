@@ -19,19 +19,19 @@ export default function Gifts() {
 
   const giftAccounts = [
     {
-      owner: "MILAGROS QUISPE FLORES",
+      owner: "Nuri (A nombre de la Novia)",
       items: [
-        { label: "INTERBANK", value: "343 3339979967" },
-        { label: "CCI", value: "00334301333997996714" },
-        { label: "YAPE", value: "953918435" }
+        { label: "BCP Soles", value: "21500909284063" },
+        { label: "CCI", value: "00221510090928406326" },
+        { label: "Yape", value: "926263277" }
       ]
     },
     {
-      owner: "CRISTHIAN CONDORI MARCAVILLACA",
+      owner: "Jesús (A nombre del Novio)",
       items: [
-        { label: "BCP", value: "21502103522066" },
-        { label: "CCI", value: "00221510210352206629" },
-        { label: "YAPE", value: "915082664" }
+        { label: "BCP Soles", value: "21571660380017" },
+        { label: "CCI", value: "00221517166038001728" },
+        { label: "Yape", value: "910783099" }
       ]
     }
   ];

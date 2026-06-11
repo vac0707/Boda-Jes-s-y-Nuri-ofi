@@ -36,7 +36,6 @@ export default function Hero() {
       <motion.div
         style={{
           y: scrollY * -0.15,
-          rotate: scrollY * 0.003,
           scale: Math.max(0.95, 1 - scrollY * 0.0001),
         }}
         className="relative w-full max-w-xl min-h-[85vh] sm:min-h-[80vh] bg-[#faf9f6] rounded-xs border-4 border-[#dfb559] p-6 sm:p-12 shadow-[0_24px_50px_rgba(0,0,0,0.4)] flex flex-col justify-between items-center z-10 transition-transform duration-75 ease-out pb-20 pt-16 sm:pb-24 sm:pt-20"

@@ -238,12 +238,32 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
 
                     {/* Highly aesthetic luxury wax seal indicator on top */}
                     {phase === "initial" && (
-                      <motion.div 
-                        className="absolute w-12 h-12 rounded-full border border-[#dfb559]/30 bg-amber-500/10 pointer-events-none"
-                        style={{ top: "54%", left: "48%" }}
-                        animate={{ scale: [0.85, 1.3, 0.85], opacity: [0.6, 0, 0.6] }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                      />
+                      <>
+                        <motion.div 
+                          className="absolute w-12 h-12 rounded-full border border-[#dfb559]/30 bg-amber-500/10 pointer-events-none"
+                          style={{ top: "54%", left: "48%" }}
+                          animate={{ scale: [0.85, 1.3, 0.85], opacity: [0.6, 0, 0.6] }}
+                          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                        />
+                        <div 
+                          className="absolute pointer-events-none flex items-center justify-center select-none"
+                          style={{ 
+                            top: "54%", 
+                            left: "48%",
+                            width: "48px",
+                            height: "48px",
+                          }}
+                        >
+                          <span 
+                            className="font-serif text-[10px] sm:text-[11px] tracking-[0.2em] text-[#553c25] font-bold uppercase pointer-events-none select-none opacity-85"
+                            style={{
+                              textShadow: "0.5px 0.5px 0.5px rgba(255, 255, 255, 0.45), -0.5px -0.5px 0.5px rgba(0, 0, 0, 0.15)",
+                            }}
+                          >
+                            click
+                          </span>
+                        </div>
+                      </>
                     )}
                   </motion.div>
                 )}

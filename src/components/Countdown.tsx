@@ -55,22 +55,18 @@ export default function Countdown() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_75%)] pointer-events-none" />
 
         <div className="max-w-4xl w-full text-center relative z-10 flex flex-col items-center">
-          {/* Editorial Heading with "Cada Segundo Nos Acerca Más" in Calligraphy Great Vibes style */}
+          {/* Elegant header styling similar to the reference image "Faltan" */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="flex flex-col items-center mb-10"
+            className="flex flex-col items-center mb-8"
           >
-            <CalendarDays className="w-6 h-6 text-[#dfb559] mb-4 animate-pulse" />
-            <h3 className="font-great-vibes text-6.5xl sm:text-8xl text-white tracking-wide font-normal mb-2 leading-none antialiased">
-              {t("countdown.title")}
+            <h3 className="font-great-vibes text-7xl sm:text-8xl text-white tracking-wide font-normal mb-1 leading-none antialiased select-none">
+              {lang === "es" ? "Faltan" : "Faltan"}
             </h3>
-            <p className="text-xs font-light text-[#93aa96]/85 tracking-[0.25em] max-w-md uppercase mt-1">
-              {t("countdown.subtitle")}
-            </p>
-            <div className="w-16 h-[0.5px] bg-[#dfb559]/40 mt-4" />
+            <div className="w-12 h-[0.5px] bg-[#dfb559]/30 mt-2" />
           </motion.div>
 
           {timeLeft.isCompleted ? (
@@ -88,40 +84,63 @@ export default function Countdown() {
               </p>
             </motion.div>
           ) : (
-            /* Glassmorphic grid */
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full max-w-3xl mx-auto">
-              {[
-                { val: timeLeft.days, label: t("countdown.days") },
-                { val: timeLeft.hours, label: t("countdown.hours") },
-                { val: timeLeft.minutes, label: t("countdown.minutes") },
-                { val: timeLeft.seconds, label: t("countdown.seconds"), accent: true },
-              ].map((slot, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9, y: 15 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
-                  className="glass-dark border border-[#dfb559]/25 hover:border-[#dfb559]/50 rounded-sm py-8 px-4 flex flex-col items-center relative overflow-hidden group shadow-2xl transition-all duration-300"
-                >
-                  {/* Internal fine line accents */}
-                  <div className="absolute inset-1.5 border border-white/5 pointer-events-none" />
-                  
-                  {/* Translucent background pulse */}
-                  <div className="absolute -inset-4 bg-[#dfb559]/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+            /* Elegant, high-fidelity horizontal countdown with inline colons exactly like the image */
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center justify-center text-white w-full max-w-2xl mx-auto py-2"
+            >
+              {/* DAYS */}
+              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
+                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
+                  {padZero(timeLeft.days)}
+                </span>
+                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
+                  {lang === "es" ? "DÍAS" : "DAYS"}
+                </span>
+              </div>
 
-                  <span className={`font-serif text-5xl sm:text-6xl font-light leading-none mb-3 drop-shadow-md select-none tracking-widest ${
-                    slot.accent ? "text-[#dfb559]" : "text-white"
-                  }`}>
-                    {padZero(slot.val)}
-                  </span>
-                  
-                  <span className="text-[10px] tracking-[0.2em] font-bold text-[#93aa96] uppercase mt-1">
-                    {slot.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
+              {/* COLON */}
+              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+
+              {/* HOURS */}
+              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
+                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
+                  {padZero(timeLeft.hours)}
+                </span>
+                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
+                  {lang === "es" ? "HORAS" : "HOURS"}
+                </span>
+              </div>
+
+              {/* COLON */}
+              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+
+              {/* MINUTES */}
+              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
+                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
+                  {padZero(timeLeft.minutes)}
+                </span>
+                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
+                  {lang === "es" ? "MINUTOS" : "MINUTES"}
+                </span>
+              </div>
+
+              {/* COLON */}
+              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+
+              {/* SECONDS */}
+              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
+                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-[#dfb559] select-none">
+                  {padZero(timeLeft.seconds)}
+                </span>
+                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
+                  {lang === "es" ? "SEGUNDOS" : "SECONDS"}
+                </span>
+              </div>
+            </motion.div>
           )}
         </div>
       </section>
