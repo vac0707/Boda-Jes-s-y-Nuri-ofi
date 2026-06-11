@@ -275,7 +275,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
                       
                       {/* Open Envelope Backdrop Graphic */}
                       <img
-                        src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781044391/SOBRE_A2_a7g5nu.png"
+                        src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781135147/SOBRE_A2_rjei79.png"
                         alt="Sobre abierto de gala"
                         className="w-full h-full object-contain z-20 pointer-events-none select-none relative"
                         style={{ filter: "drop-shadow(0 15px 35px rgba(0,0,0,0.18))" }}
@@ -326,7 +326,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
                           {/* Inner gold crest for the photo */}
                           <div className="relative w-full aspect-[5/4] sm:aspect-[4/3] rounded-xs overflow-hidden border border-[#dfb559] shadow-md bg-[#233025]">
                             <img
-                              src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781044391/SOBRE_A2_a7g5nu.png"
+                              src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781135147/SOBRE_A2_rjei79.png"
                               alt="Jesús y Nuri Acoplados"
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
@@ -400,7 +400,7 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
                         {/* Perfect aspect picture */}
                         <div className="relative w-[190px] sm:w-[250px] aspect-[4/3] mb-5 sm:mb-6 rounded-xs overflow-hidden border-2 border-[#dfb559]/60 shadow-lg">
                           <img
-                            src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781044391/SOBRE_A2_a7g5nu.png"
+                            src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781135147/SOBRE_A2_rjei79.png"
                             alt="Visual de Novios Jesús y Nuri"
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"

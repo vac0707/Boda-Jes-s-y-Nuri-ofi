@@ -12,7 +12,6 @@ import PhotoGallery from "./components/PhotoGallery";
 import Gifts from "./components/Gifts";
 import Countdown from "./components/Countdown";
 import RSVPForm from "./components/RSVPForm";
-import RomanticQuote from "./components/RomanticQuote";
 import FloatingLeaves from "./components/FloatingLeaves";
 import FooterRefined from "./components/FooterRefined";
 import { useLanguage } from "./hooks/useLanguage";
@@ -74,15 +73,6 @@ export default function App() {
 
           {/* Fullscreen Parallax Header */}
           <Hero />
-
-          {/* Separator Romantic Quote Panel 1 */}
-          <RomanticQuote
-            quote={lang === "es"
-              ? "Dos almas con un solo pensamiento, dos corazones que laten como uno solo."
-              : "Two souls with but a single thought, two hearts that beat as one."}
-            author="Friedrich Halm"
-            bgType="sage"
-          />
 
           {/* Elegant Wedding Portrait above families */}
           <PhotoDivider imageUrl="https://res.cloudinary.com/dcnynnstm/image/upload/v1780968212/22_wynwmc.jpg" alt="Jesús y Nuri - Elegancia" />

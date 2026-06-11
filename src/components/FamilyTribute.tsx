@@ -49,10 +49,10 @@ export default function FamilyTribute() {
             <div className="w-8 h-[0.5px] bg-[#dfb559]/35 mb-6" />
             <div className="space-y-4">
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Víctor Raúl Aydee Tapia
+                Reyna Huchamaco de Cuevas
               </p>
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Ana María Quispe de Aydee
+                Enrique Cuevas Halanoca
               </p>
             </div>
           </div>
@@ -65,10 +65,10 @@ export default function FamilyTribute() {
             <div className="w-8 h-[0.5px] bg-[#dfb559]/35 mb-6" />
             <div className="space-y-4">
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Jorge Luis Alarcón Valdivia
+                Carlos Alberto Nina Apaza
               </p>
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Martha Cecilia de Alarcón
+                Yen y Virginia Velasquez Velasquez
               </p>
             </div>
           </div>
@@ -81,10 +81,10 @@ export default function FamilyTribute() {
             <div className="w-8 h-[0.5px] bg-[#dfb559]/35 mb-6" />
             <div className="space-y-4">
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Carlos Manuel Prado Medina
+                José Pompeyo Ramírez Gil
               </p>
               <p className="font-serif text-[17px] sm:text-[19px] text-[#3a4b3d] font-medium leading-relaxed tracking-wide">
-                Elena Sofía Torres de Prado
+                Graciela Bravo Portal
               </p>
             </div>
           </div>

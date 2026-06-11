@@ -85,7 +85,7 @@ export default function Hero() {
           {/* Couple Romantic Portrait Portada Cover */}
           <div className="relative w-[310px] sm:w-[420px] mb-6 select-none flex justify-center items-center">
             <img
-              src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781044391/SOBRE_CON_FOT2_1_gnj6rz.png"
+              src="https://res.cloudinary.com/dcnynnstm/image/upload/v1781135147/SOBRE_FOTO_PRINCIPAL_xmzrtw.png"
               alt="Jesús y Nuri"
               className="w-full h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.07)]"
               referrerPolicy="no-referrer"
