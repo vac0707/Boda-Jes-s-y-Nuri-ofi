@@ -241,14 +241,14 @@ export default function WelcomeScreen({ onOpen }: WelcomeScreenProps) {
                       <>
                         <motion.div 
                           className="absolute w-12 h-12 rounded-full border border-[#dfb559]/30 bg-amber-500/10 pointer-events-none"
-                          style={{ top: "54%", left: "48%" }}
+                          style={{ top: "65%", left: "48%" }}
                           animate={{ scale: [0.85, 1.3, 0.85], opacity: [0.6, 0, 0.6] }}
                           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
                         />
                         <div 
                           className="absolute pointer-events-none flex items-center justify-center select-none"
                           style={{ 
-                            top: "54%", 
+                            top: "65%", 
                             left: "48%",
                             width: "48px",
                             height: "48px",

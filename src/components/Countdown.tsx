@@ -90,55 +90,63 @@ export default function Countdown() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center justify-center text-white w-full max-w-2xl mx-auto py-2"
+              className="w-full max-w-2xl mx-auto py-2"
             >
-              {/* DAYS */}
-              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
-                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
-                  {padZero(timeLeft.days)}
-                </span>
-                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
-                  {lang === "es" ? "DÍAS" : "DAYS"}
-                </span>
-              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-start text-white">
+                {/* DAYS */}
+                <div className="flex flex-col items-center">
+                  <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none leading-none">
+                    {padZero(timeLeft.days)}
+                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-3 font-semibold">
+                    {lang === "es" ? "DÍAS" : "DAYS"}
+                  </span>
+                </div>
 
-              {/* COLON */}
-              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+                {/* COLON */}
+                <div className="flex items-center justify-center h-[3rem] sm:h-[4.5rem] md:h-[6rem]">
+                  <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 select-none leading-none">:</span>
+                </div>
 
-              {/* HOURS */}
-              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
-                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
-                  {padZero(timeLeft.hours)}
-                </span>
-                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
-                  {lang === "es" ? "HORAS" : "HOURS"}
-                </span>
-              </div>
+                {/* HOURS */}
+                <div className="flex flex-col items-center">
+                  <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none leading-none">
+                    {padZero(timeLeft.hours)}
+                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-3 font-semibold">
+                    {lang === "es" ? "HORAS" : "HOURS"}
+                  </span>
+                </div>
 
-              {/* COLON */}
-              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+                {/* COLON */}
+                <div className="flex items-center justify-center h-[3rem] sm:h-[4.5rem] md:h-[6rem]">
+                  <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 select-none leading-none">:</span>
+                </div>
 
-              {/* MINUTES */}
-              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
-                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none">
-                  {padZero(timeLeft.minutes)}
-                </span>
-                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
-                  {lang === "es" ? "MINUTOS" : "MINUTES"}
-                </span>
-              </div>
+                {/* MINUTES */}
+                <div className="flex flex-col items-center">
+                  <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight select-none leading-none">
+                    {padZero(timeLeft.minutes)}
+                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-3 font-semibold">
+                    {lang === "es" ? "MINUTOS" : "MINUTES"}
+                  </span>
+                </div>
 
-              {/* COLON */}
-              <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 pb-7 sm:pb-9 px-1.5 sm:px-3 self-center select-none">:</span>
+                {/* COLON */}
+                <div className="flex items-center justify-center h-[3rem] sm:h-[4.5rem] md:h-[6rem]">
+                  <span className="text-3xl sm:text-5xl md:text-6xl font-light text-white/30 select-none leading-none">:</span>
+                </div>
 
-              {/* SECONDS */}
-              <div className="flex flex-col items-center min-w-[65px] sm:min-w-[90px] md:min-w-[120px]">
-                <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-[#dfb559] select-none">
-                  {padZero(timeLeft.seconds)}
-                </span>
-                <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-2.5 font-semibold">
-                  {lang === "es" ? "SEGUNDOS" : "SECONDS"}
-                </span>
+                {/* SECONDS */}
+                <div className="flex flex-col items-center">
+                  <span className="font-sans text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-[#dfb559] select-none leading-none">
+                    {padZero(timeLeft.seconds)}
+                  </span>
+                  <span className="text-[10px] sm:text-xs tracking-[0.2em] text-[#93aa96] uppercase mt-3 font-semibold">
+                    {lang === "es" ? "SEGUNDOS" : "SECONDS"}
+                  </span>
+                </div>
               </div>
             </motion.div>
           )}
